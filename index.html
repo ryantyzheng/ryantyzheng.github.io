@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Zheng — Mechanical Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F6;
+    --ink:#1B1E22;
+    --ink-soft:#565B62;
+    --line:#D8D8D2;
+    --blueprint:#28527A;
+    --blueprint-tint:#EDF2F6;
+    --safety:#D65A31;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:.35;
+    pointer-events:none;
+    z-index:0;
+  }
+  .wrap{
+    position:relative; z-index:1;
+    max-width:760px;
+    margin:0 auto;
+    padding:48px 24px 96px;
+  }
+
+  /* ---------- title block ---------- */
+  .titleblock{
+    border:1.5px solid var(--ink);
+    background:var(--paper);
+    margin-bottom:56px;
+  }
+  .tb-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+  }
+  .tb-row + .tb-row{ border-top:1px solid var(--ink); }
+  .tb-cell{
+    padding:14px 16px;
+    border-left:1px solid var(--ink);
+  }
+  .tb-cell:first-child{ border-left:none; }
+  .tb-label{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.12em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    margin-bottom:4px;
+    display:block;
+  }
+  .tb-value{
+    font-family:var(--sans);
+    font-size:15px;
+    font-weight:600;
+  }
+  .tb-value a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--ink); }
+  .tb-value a:hover{ color:var(--safety); border-color:var(--safety); }
+  .tb-status{
+    background:var(--blueprint);
+    color:var(--paper);
+  }
+  .tb-status .tb-label{ color:#C9D8E6; }
+
+  .name-row{ padding:24px 20px 8px; }
+  .name{
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:clamp(32px,6vw,44px);
+    letter-spacing:-.01em;
+    margin:0;
+  }
+  .role{
+    font-family:var(--mono);
+    font-size:14px;
+    color:var(--blueprint);
+    margin:6px 0 20px;
+    letter-spacing:.02em;
+  }
+
+  /* ---------- section framing ---------- */
+  section{ margin-bottom:56px; position:relative; }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .section-head .tag{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--blueprint);
+    border:1px solid var(--blueprint);
+    padding:2px 7px;
+    letter-spacing:.08em;
+  }
+  .section-head h2{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  p.bio{ font-size:16px; color:var(--ink); max-width:66ch; }
+  p.bio a{ color:var(--blueprint); text-decoration:none; border-bottom:1px solid var(--blueprint); }
+  p.bio a:hover{ color:var(--safety); border-color:var(--safety); }
+
+  /* ---------- entries (experience / projects) ---------- */
+  .entry{
+    padding:20px 0;
+    border-top:1px solid var(--line);
+  }
+  .entry:last-child{ padding-bottom:0; }
+  .entry-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .entry-title{ font-size:16px; font-weight:600; margin:0; }
+  .entry-org{ color:var(--blueprint); font-weight:500; }
+  .entry-date{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .entry-loc{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .entry ul{
+    margin:10px 0 0;
+    padding-left:18px;
+    color:var(--ink);
+    font-size:14.5px;
+  }
+  .entry li{ margin-bottom:6px; }
+  .entry li:last-child{ margin-bottom:0; }
+  .tools{
+    margin-top:10px;
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+  .tools span{
+    font-family:var(--mono);
+    font-size:11px;
+    background:var(--blueprint-tint);
+    color:var(--blueprint);
+    padding:2px 8px;
+    border-radius:2px;
+  }
+  .placeholder-note{
+    margin-top:10px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--safety);
+    border-left:2px solid var(--safety);
+    padding-left:8px;
+  }
+
+  /* ---------- skills ---------- */
+  .skill-group{ margin-bottom:14px; }
+  .skill-group:last-child{ margin-bottom:0; }
+  .skill-label{
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:8px;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-family:var(--mono);
+    font-size:12.5px;
+    border:1px solid var(--line);
+    padding:4px 10px;
+    color:var(--ink);
+  }
+
+  /* ---------- education ---------- */
+  .edu-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+  }
+  .edu-school{ font-weight:600; }
+  .edu-degree{ color:var(--ink-soft); font-size:14px; margin-top:2px; }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1.5px solid var(--ink);
+    padding-top:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .footer-links{ display:flex; gap:18px; }
+  .footer-links a{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--ink);
+  }
+  .footer-links a:hover{ color:var(--safety); border-color:var(--safety); }
+  .resume-btn{
+    font-family:var(--mono);
+    font-size:12.5px;
+    background:var(--ink);
+    color:var(--paper);
+    padding:8px 14px;
+    text-decoration:none;
+    letter-spacing:.03em;
+  }
+  .resume-btn:hover{ background:var(--safety); }
+
+  @media (max-width:600px){
+    .tb-row{ grid-template-columns:1fr; }
+    .tb-cell{ border-left:none; border-top:1px solid var(--ink); }
+    .tb-cell:first-child{ border-top:none; }
+    footer{ flex-direction:column; align-items:flex-start; }
+  }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--safety); outline-offset:2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- TITLE BLOCK -->
+  <div class="titleblock">
+    <div class="name-row">
+      <p class="name">Ryan Zheng</p>
+      <p class="role">MECHANICAL ENGINEER — MANUFACTURING &amp; AUTOMATION</p>
+    </div>
+    <div class="tb-row">
+      <div class="tb-cell">
+        <span class="tb-label">Email</span>
+        <span class="tb-value"><a href="mailto:ryantyzheng@gmail.com">ryantyzheng@gmail.com</a></span>
+      </div>
+      <div class="tb-cell">
+        <span class="tb-label">LinkedIn</span>
+        <span class="tb-value"><a href="https://linkedin.com/in/ryanzhen03" target="_blank" rel="noopener">/in/ryanzhen03</a></span>
+      </div>
+      <div class="tb-cell">
+        <span class="tb-label">Location</span>
+        <span class="tb-value">Waterloo, ON</span>
+      </div>
+    </div>
+    <div class="tb-row">
+      <div class="tb-cell tb-status" style="grid-column: 1 / -1;">
+        <span class="tb-label">Status</span>
+        <span class="tb-value" style="color:var(--paper);">B.A.Sc. Mechanical Engineering, University of Waterloo — graduating June 2026. Open to new-grad engineering roles.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIO -->
+  <section>
+    <p class="bio">
+      Hi, I'm Ryan. I'm finishing a degree in Mechanical Engineering at the
+      <a href="#" target="_blank" rel="noopener">University of Waterloo</a>, with most of my
+      experience so far on the manufacturing floor: I was most recently an Engineering Analyst on the
+      stamping line at Toyota Motor Manufacturing Canada, where I worked on press-line uptime and
+      steel cost reduction. Before that, I supported pilot vehicle assembly at Toyota, built and tested
+      robots at Swap Robotics, and ran reliability testing on production automotive parts at Multimatic.
+      I like problems that live at the intersection of design, fabrication, and the shop floor.
+    </p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-head">
+      <span class="tag">LOG</span>
+      <h2>Experience</h2>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <p class="entry-title">Engineering Analyst — Stamping <span class="entry-org">· Toyota Motor Manufacturing Canada</span></p>
+        <span class="entry-date">Sep 2025 – Dec 2025</span>
+      </div>
+      <div class="entry-loc">Cambridge, ON</div>
+      <ul>
+        <li>Eliminated a bottleneck in the stamping press sheet feeder, cutting total line downtime by 3%.</li>
+        <li>Led a plant-wide steel cost reduction project on a steel blank, saving over $1,000,000 a year.</li>
+        <li>Partnered with Toyota Motor Manufacturing Indiana to design and fabricate a hydraulic workbench, cutting parts-maintenance time by 85%.</li>
+        <li>Tracked and organized root causes of weekly downtime through production floor communication and reported findings to engineering managers.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <p class="entry-title">Engineering Analyst — Pilot Assembly <span class="entry-org">· Toyota Motor Manufacturing Canada</span></p>
+        <span class="entry-date">Jan 2024 – Apr 2024</span>
+      </div>
+      <div class="entry-loc">Cambridge / Woodstock, ON</div>
+      <ul>
+        <li>Implemented a laser-locating system for the hub nut tightener, reducing total line downtime by 7%.</li>
+        <li>Designed and fabricated 8 jigs and fixtures for pre-launch vehicle assembly, enabling a smooth changeover to an updated model.</li>
+        <li>Managed large pull-ahead projects, including AGV cage demolition and an assembly-line extension.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <p class="entry-title">Operations Technician <span class="entry-org">· Swap Robotics</span></p>
+        <span class="entry-date">Sep 2022 – Dec 2022</span>
+      </div>
+      <div class="entry-loc">Kitchener, ON</div>
+      <ul>
+        <li>Led the robot assembly team, overseeing PCB programming, soldering, and full robot assembly.</li>
+        <li>Designed and 3D-printed a custom charging solution for 12 body cameras simultaneously, with charge-progress indication.</li>
+        <li>Developed a test protocol to verify full robot functionality before deployment.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <p class="entry-title">Test Lab Technician <span class="entry-org">· Multimatic Inc.</span></p>
+        <span class="entry-date">Jan 2022 – Apr 2022</span>
+      </div>
+      <div class="entry-loc">East Gwillimbury, ON</div>
+      <ul>
+        <li>Tested reliability of pre-launch and in-production parts for Ford, GM, and Chrysler — ball joint/bushing push-outs, UTS, fatigue, and torque testing.</li>
+        <li>Led construction of actuator setups for control-arm reliability testing, using SOLIDWORKS analysis to meet measurement requirements.</li>
+        <li>Analyzed and graphed torque measurement data to confirm production criteria were met.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-head">
+      <span class="tag">SHOP</span>
+      <h2>Projects</h2>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <p class="entry-title">Precision Thermal Monitoring System</p>
+        <span class="entry-date">Sep 2025 – Apr 2026</span>
+      </div>
+      <ul>
+        <li>Designed and deployed a weather-resistant mounting and enclosure system for multi-site thermal data collection for environmental monitoring.</li>
+        <li>Currently in use by Professor Roydon Fraser for graduate research at the University of Waterloo Environmental Reserve.</li>
+      </ul>
+      <div class="tools">
+        <span>SolidWorks</span><span>Ansys</span><span>CNC Machining</span>
+      </div>
+      <p class="placeholder-note">// add: writeup, photos, and a link when ready</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-top">
+        <p class="entry-title">Remote Control Load-Carrying Robot</p>
+        <span class="entry-date">Jan 2025 – Apr 2025</span>
+      </div>
+      <ul>
+        <li>Designed and built a remote-control robot capable of carrying over five times its own weight.</li>
+      </ul>
+      <div class="tools">
+        <span>SolidWorks</span><span>Arduino</span><span>ESP32</span>
+      </div>
+      <p class="placeholder-note">// add: writeup, photos, and a link when ready</p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-head">
+      <span class="tag">SPEC</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="skill-group">
+      <span class="skill-label">Software</span>
+      <div class="chips">
+        <span class="chip">SolidWorks</span>
+        <span class="chip">MATLAB</span>
+        <span class="chip">Ansys</span>
+        <span class="chip">CAMMaster</span>
+        <span class="chip">G-Code</span>
+        <span class="chip">Python</span>
+        <span class="chip">C / C++</span>
+        <span class="chip">Arduino</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <span class="skill-label">Shop &amp; machine tools</span>
+      <div class="chips">
+        <span class="chip">CNC machining</span>
+        <span class="chip">Manual mill / lathe</span>
+        <span class="chip">3D printing</span>
+        <span class="chip">Fabrication &amp; welding-adjacent work</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-head">
+      <span class="tag">REF</span>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-school">University of Waterloo</div>
+        <div class="edu-degree">Bachelor of Applied Science, Mechanical Engineering</div>
+      </div>
+      <span class="entry-date">Sep 2021 – Jun 2026</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="mailto:ryantyzheng@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/ryanzhen03" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <a class="resume-btn" href="Ryan_Zheng_Resume.pdf" target="_blank" rel="noopener">Download Résumé (PDF) ↓</a>
+  </footer>
+
+</div>
+</body>
+</html>
