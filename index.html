@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Zheng — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF;
+    --ink:#161616;
+    --ink-soft:#666666;
+    --line:#E4E4E1;
+    --wash:#F6F5F2;
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Inter', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  button{ font-family:inherit; cursor:pointer; }
+  img{ max-width:100%; }
+  html, body{ overflow-x:hidden; }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,1);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1100px; margin:0 auto;
+    padding:18px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:24px;
+  }
+  .logo{
+    background:none;
+    border:none;
+    padding:0;
+  }
+  .logo img{
+    display:block;
+    width:auto;
+    max-height:40px;
+  }
+  .nav-links{ display:flex; gap:36px; }
+  .nav-link{
+    background:none; border:none;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:4px 0;
+    border-bottom:1px solid transparent;
+  }
+  .nav-link:hover{ color:var(--ink); }
+  .nav-link.active{ color:var(--ink); border-bottom-color:var(--ink); }
+  .nav-social{ display:flex; gap:14px; }
+  .nav-social a{ display:flex; color:var(--ink-soft); transition:color .15s ease; }
+  .nav-social a:hover{ color:var(--ink); }
+  .nav-social svg{ width:18px; height:18px; }
+
+  @media (max-width:640px){
+    .nav-links{ gap:18px; }
+    .logo{ font-size:16px; }
+  }
+  @media (max-width:420px){
+    .nav-inner{ padding:14px 16px; gap:12px; }
+    .nav-links{ gap:12px; }
+    .nav-link{ font-size:11px; letter-spacing:.08em; }
+    .logo img{ max-height:32px; }
+  }
+
+  /* ---------- pages ---------- */
+  .page{ display:none; }
+  .page.active{ display:block; }
+
+  /* ---------- image placeholders ---------- */
+  .ph{
+    background:
+      repeating-linear-gradient(135deg, var(--wash), var(--wash) 10px, #EFEEEA 10px, #EFEEEA 20px);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .ph-label{
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    font-family:var(--sans);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .ph-label svg{ width:26px; height:26px; opacity:.5; }
+
+  /* ---------- home hero ---------- */
+  .hero-photo{ width:100%; height:min(60vh,520px); }
+  .intro-wrap{
+    max-width:1100px; margin:0 auto;
+    padding:36px 28px 40px;
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:56px;
+    align-items:center;
+  }
+  .intro-left{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+  }
+  .intro-photo{
+    width:100%;
+    max-width:400px;
+    aspect-ratio:4 / 5;
+    justify-self:start;
+    overflow:hidden;
+  }
+  .intro-actions{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+    width:100%;
+    max-width:360px;
+  }
+  .intro-actions .btn{
+    width:160px;
+    min-width:160px;
+    padding-left:0;
+    padding-right:0;
+  }
+  .intro-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    border: 1px solid var(--line);
+  }
+  .intro h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(30px,4vw,44px);
+    line-height:1.15;
+    margin:0 0 20px;
+    letter-spacing:-.01em;
+  }
+  .intro p{ font-size:16px; color:#333; max-width:56ch; margin:0; }
+
+  @media (max-width:800px){
+    .intro-wrap{ grid-template-columns:1fr; gap:28px; padding:40px 24px 24px; }
+    .intro-photo{ aspect-ratio:4 / 5; }
+  }
+
+  .cta-row{
+    max-width:1100px; margin:0 auto;
+    padding:0 28px 8px;
+    display:flex; flex-wrap:wrap; gap:14px;
+  }
+  .btn{
+    display:inline-block;
+    font-size:12.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    background:transparent;
+    padding:13px 30px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .btn:hover{ background:var(--ink); color:var(--paper); }
+  .btn-solid{ background:var(--ink); color:var(--paper); }
+  .btn-solid:hover{ background:transparent; color:var(--ink); }
+  .btn-white{ background:var(--paper); color:var(--ink); border-color:var(--ink); }
+  .btn-white:hover{ background:var(--ink); color:var(--paper); }
+
+  .scroll-note{
+    max-width:1100px; margin:0 auto;
+    padding:1px 28px 1px;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:17px;
+    color:var(--ink-soft);
+  }
+
+  .banner-photo{ width:100%; height:min(46vh,380px); margin-top:32px; }
+
+  /* ---------- project grid ---------- */
+  .section-title{
+    max-width:1100px; margin:0 auto;
+    padding:32px 28px 20px;
+  }
+  .section-title h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(26px,3.4vw,34px);
+    margin:0;
+    letter-spacing:-.01em;
+  }
+  .project-grid{
+    max-width:1100px; margin:0 auto;
+    padding:16px 28px 80px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:40px 32px;
+  }
+  .project-grid .placeholder-card{
+    max-width:480px;
+    width:100%;
+    justify-self:center;
+  }
+  .card-photo{ aspect-ratio:4/3; margin-bottom:16px; }
+  .card-photo img, .card-photo-lg img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+    border:1px solid var(--line);
+    background:transparent;
+  }
+  .card-photo img.zoom-fit,
+  .card-photo-lg img.zoom-fit{
+    object-fit:cover;
+    object-position:center;
+  }
+
+  /* Make full project images fit inside their container (e.g. leaves.png) */
+  .project-full-item .card-photo-lg img{
+    width:100%;
+    max-width:100%;
+    height:auto;
+    object-fit:contain;
+    display:block;
+    margin:0 auto;
+    background:transparent;
+  }
+
+  @media (max-width:800px){
+    .project-full-item .card-photo-lg img{ max-width:100%; }
+  }
+
+  /* Iteration gallery (horizontal scroll) */
+  .iteration-section{ max-width:900px; margin:18px auto 40px; padding:0; }
+  .iteration-section.final-deployment-section{ max-width:1100px; }
+  .iteration-section h2{ font-family:var(--serif); font-size:20px; margin:0 0 12px; }
+  .iteration-gallery{
+    display:flex; gap:16px; overflow-x:auto; padding:12px 4px; -webkit-overflow-scrolling:touch;
+  }
+  .iteration-gallery.final-deployment{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    overflow:visible;
+    padding:0;
+    scroll-snap-type:none;
+    max-width:min(1100px,calc(100vw - 56px));
+    margin:0 auto;
+    align-items:center;
+  }
+  .iteration-gallery.final-deployment .iteration-item{
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+    scroll-snap-align:none;
+  }
+  .iteration-gallery.final-deployment .iteration-item:first-child{
+    max-width:1100px;
+  }
+  .iteration-gallery.final-deployment .iteration-item:last-child{
+    max-width:760px;
+    margin-bottom:0;
+  }
+  .iteration-gallery.final-deployment .iteration-item img{
+    width:100%;
+    height:auto;
+    display:block;
+    margin:0 auto;
+    border-radius:8px;
+    object-fit:contain;
+  }
+  .iteration-gallery.final-deployment .iteration-item:first-child img{
+    min-height:460px;
+  }
+  .iteration-gallery.final-deployment .iteration-item:last-child img{
+    min-height:340px;
+  }
+  @media (max-width:640px){
+    .iteration-gallery.final-deployment .iteration-item:first-child img,
+    .iteration-gallery.final-deployment .iteration-item:last-child img{
+      min-height:0;
+    }
+  }
+  .iteration-item{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    flex:0 0 auto;
+    width:min(260px,100%);
+    scroll-snap-align:center;
+    align-self:stretch;
+  }
+  .iteration-item img{
+    width:100%;
+    height:220px;
+    max-height:none;
+    object-fit:contain;
+    display:block;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:transparent;
+  }
+  .image-modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(18,18,18,0.86);
+    z-index:1000;
+    padding:20px;
+  }
+  .image-modal.active{
+    display:flex;
+  }
+  .image-modal__content{
+    position:relative;
+    max-width:80%;
+    max-height:80%;
+    width:auto;
+    border-radius:12px;
+    overflow:hidden;
+    background:#fff;
+    box-shadow:0 32px 80px rgba(0,0,0,0.18);
+  }
+  .image-modal__content img{
+    max-width:100%;
+    max-height:calc(100vh - 120px);
+    width:auto;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    background:transparent;
+  }
+  .image-modal__close{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:999px;
+    background:rgba(255,255,255,0.95);
+    color:#111;
+    font-size:20px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .image-modal__close:hover{
+    background:rgba(255,255,255,1);
+  }
+  .iteration-item img{
+    width:100%;
+    max-height:200px;
+    object-fit:contain;
+    display:block;
+    border:none;
+    border-radius:6px;
+  }
+  .iteration-item figcaption{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    font-size:13px;
+    color:var(--ink-soft);
+    flex:1;
+  }
+  .iteration-item figcaption h3{
+    font-family:var(--serif);
+    font-size:16px;
+    margin:0;
+    color:var(--ink);
+  }
+  .iteration-item figcaption ul{
+    margin:0;
+    padding-left:18px;
+    color:#333;
+  }
+  .iteration-item figcaption li{
+    margin-bottom:6px;
+  }
+  .iteration-gallery{ scroll-snap-type:x mandatory; }
+  .overview-layout{
+    display:grid;
+    grid-template-columns:1fr minmax(380px, 730px) 1fr;
+    gap:18px;
+    align-items:center;
+    margin:10px 0 6px;
+  }
+  .overview-side-col{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-self:stretch;
+    justify-content:center;
+  }
+  .overview-image-frame{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+  }
+  .overview-image-frame img{
+    width:min(78%, 680px);
+    height:auto;
+    display:block;
+    margin:0 auto;
+    object-fit:contain;
+    background:transparent;
+  }
+  .component-link{
+    display:inline-flex;
+    align-items:center;
+    width:max-content;
+    font-size:13px;
+    font-weight:700;
+    text-decoration:underline;
+    text-underline-offset:3px;
+    color:var(--ink);
+  }
+  @media (max-width:640px){ .iteration-item{ width:200px; } .overview-layout{ grid-template-columns:1fr; } .overview-side-col{ flex-direction:row; flex-wrap:wrap; justify-content:center; } .overview-image-frame img{ width:100%; } }
+  .card h3{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:20px;
+    margin:0 0 8px;
+  }
+  .card-desc{ font-size:14px; color:var(--ink-soft); margin:0 0 12px; }
+  .card-link{
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:2px;
+  }
+  .card-link:hover{ color:var(--ink-soft); border-color:var(--ink-soft); }
+
+  /* ---------- projects page (expanded cards) ---------- */
+  .project-full{
+    max-width:1100px; margin:0 auto;
+    padding:24px 28px 100px;
+    display:flex; flex-direction:column; gap:64px;
+    align-items:center;
+  }
+  .project-full-item{
+    display:grid;
+    grid-template-columns:1.1fr 1.6fr;
+    gap:40px;
+    align-items:start;
+    max-width:900px;
+    width:100%;
+    margin:0 auto;
+  }
+  .project-full-item:nth-child(even) .card-photo-lg{ order:2; }
+  .card-photo-lg{
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
+  }
+  .project-full-item .card-photo-lg img{
+    width:100%;
+    max-width:100%;
+    height:auto;
+    object-fit:contain;
+    display:block;
+    margin:0 auto;
+  }
+  .project-full-item > div:last-child{
+    max-width:460px;
+  }
+  .project-full-item h3{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:24px;
+    margin:0 0 6px;
+  }
+  .project-full-item .dates{
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+    display:block;
+  }
+  .project-full-item ul{ margin:0 0 14px; padding-left:18px; font-size:14.5px; color:#333; }
+  .project-full-item li{ margin-bottom:6px; }
+  .tools-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .tools-row span{
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    background:var(--wash);
+    padding:4px 10px;
+    color:var(--ink-soft);
+  }
+  .note{
+    font-size:12px; font-style:italic; color:var(--ink-soft);
+  }
+
+  @media (max-width:760px){
+    .project-full-item{ grid-template-columns:1fr; }
+    .project-full-item:nth-child(even) .card-photo-lg{ order:0; }
+  }
+
+  @media (min-width:760px){
+    /* nudge large project images down slightly to align with the title */
+    .project-full-item .card-photo-lg{ margin-top:18px; }
+  }
+
+  /* ---------- single project page ---------- */
+  .back-link{
+    max-width:1100px; margin:0 auto;
+    padding:80px 28px 0;
+  }
+  .back-link a{
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+  }
+  .back-link a:hover{ color:var(--ink); border-color:var(--ink); }
+  .project-single{
+    max-width:1100px; margin:0 auto;
+    padding:20px 28px 100px;
+  }
+
+  /* ---------- resume page ---------- */
+  .resume-wrap{
+    max-width:900px; margin:0 auto;
+    padding:56px 28px 100px;
+  }
+  .resume-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    flex-wrap:wrap; gap:20px;
+    margin-bottom:28px;
+  }
+  .resume-head h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(26px,3.4vw,34px);
+    margin:0;
+  }
+  @media (max-width:640px){
+    .resume-head{
+      justify-content:center;
+      text-align:center;
+    }
+    .resume-head .btn{
+      margin:0 auto;
+    }
+  }
+  .resume-wrap h3{
+    text-align:center;
+  }
+  .exp-meta{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:12px;
+    margin:0 auto 14px;
+    max-width:900px;
+    min-height:1.3em;
+    flex-wrap:wrap;
+  }
+  .exp-time{
+    flex:0 0 auto;
+    text-align:right;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .exp-location{
+    flex:0 0 auto;
+    text-align:right;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    justify-self:end;
+  }
+  @media (max-width:640px){
+    .exp-meta{
+      justify-content:center;
+      text-align:center;
+      gap:6px;
+    }
+    .exp-time,
+    .exp-location{
+      flex-basis:100%;
+      text-align:center;
+    }
+  }
+  .company-logo-inline{
+    display:flex;
+    justify-content:center;
+    margin-bottom:16px;
+  }
+  .company-logo-inline img{
+    max-width:180px;
+    height:auto;
+    display:block;
+  }
+  .swap-logo-inline img,
+  .multimatic-logo-inline img{
+    max-width:min(350px, 100%);
+  }
+  .resume-embed{
+    border:0px solid var(--line);
+    width:100%;
+    min-height:500px;
+  }
+  .resume-embed iframe{ width:100%; height:100%; border:none; display:block; }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:36px 28px;
+    margin-top:auto;
+  }
+  .footer-inner{
+    max-width:1100px; margin:0 auto;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:16px;
+  }
+  .footer-inner p{ font-size:13px; color:var(--ink-soft); margin:0; }
+  .footer-social{ display:flex; gap:16px; }
+  .footer-social a{ color:var(--ink-soft); display:flex; }
+  .footer-social a:hover{ color:var(--ink); }
+  .footer-social svg{ width:17px; height:17px; }
+
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <button class="logo" onclick="showPage('home')">
+        <img src="logo.png" alt="Ryan Zheng logo">
+      </button>
+      <nav class="nav-links">
+        <button class="nav-link active" id="nav-home" onclick="showPage('home')">Home</button>
+        <button class="nav-link" id="nav-resume" onclick="showPage('resume')">EXPERIENCE</button>
+        <button class="nav-link" id="nav-projects" onclick="showPage('projects')">Projects</button>
+      </nav>
+      <div class="nav-social">
+        <a href="https://linkedin.com/in/ryanzhen03" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HOME ============ -->
+    <section id="page-home" class="page active">
+      <div class="intro-wrap">
+        <div class="intro-left">
+          <div class="intro-photo">
+            <img src="profile.jpg" alt="Photo of Ryan Zheng">
+          </div>
+          <div class="intro-actions">
+            <button class="btn" onclick="showPage('projects')">Projects</button>
+            <button class="btn btn-white" onclick="showPage('resume')">EXPERIENCE</button>
+          </div>
+        </div>
+        <div>
+          <h1>I'm Ryan Zheng, a Mechanical Engineer.</h1>
+          <p>
+            I'm a recent graduate of the University of Waterloo's Mechanical Engineering program,
+            Most of my experience so far has been manufacturing related — most recently as an Engineering 
+            Analyst at the stamping department of Toyota Motor Manufacturing Canada. Before that, I was 
+            invovled in pilot vehicle projects at Toyota, built and tested robots at Swap Robotics, and 
+            ran reliability testing on production automotive parts at Multimatic.
+          </p>
+        </div>
+      </div>
+
+      <p class="scroll-note">Scroll below to see some of what I've been working on.</p>
+
+      <div class="section-title"><h2>Featured Projects</h2></div>
+      <div class="project-grid">
+
+        <div class="card">
+          <div class="card-photo">
+            <img src="precision-thermal.png" alt="Precision Thermal Monitoring System">
+          </div>
+          <h3>Precision Thermal Monitoring System</h3>
+          <a class="card-link" href="#" onclick="showPage('project-precision-thermal'); return false;">Learn More →</a>
+        </div>
+
+        <div class="card">
+          <div class="card-photo">
+            <img src="robot.jpg" alt="Remote Control Load-Carrying Robot" class="zoom-fit">
+          </div>
+          <h3>Remote Control Load-Carrying Robot  </h3>
+          <a class="card-link" href="#" onclick="showPage('project-rc-robot'); return false;">Learn More →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE / RESUME ============ -->
+    <section id="page-resume" class="page">
+      <div class="resume-wrap">
+        <div class="resume-head">
+          <h2>Experience</h2>
+          <a class="btn" href="Ryan_Zheng_Resume.pdf" download>Download Resume</a>
+        </div>
+
+        <div class="resume-embed">
+          <div class="experience-grid">
+            <div class="experience-list">
+             
+              <article class="exp-item">
+                <div class="company-logo-inline">
+                  <img src="toyota-logo.png" alt="Toyota logo">
+                </div>
+                <h3>Engineering Analyst (Stamping) — Toyota Motor Manufacturing Canada</h3>
+                <div class="exp-meta">
+                  <span class="exp-time">Sep. 2025 – Dec. 2025</span>
+                  <span class="exp-location">Cambridge, ON</span>
+                </div>
+                <ul>
+                  <li>Eliminated a bottleneck issue with the stamping press sheet feeder with, decreased the total line downtime by 3%</li>
+                  <li>Led a plant-wide steel cost reduction (SCR) project for a steel blank that reduces overall cost by over $1,000,000 a year</li>
+                  <li>Collaborated with Toyota Motor Manufacturing Indiana to design and fabricate a hydraulic workbench that allows parts maintenance to be done in house and reduces maintenance time by 85%</li>
+                  <li>Identified and organized root causes of weekly downtime by communicating with production members and reported to engineering managers</li>
+                </ul>
+              </article>
+
+              <article class="exp-item">
+                <h3>Engineering Analyst (Pilot Assembly) — Toyota Motor Manufacturing Canada</h3>
+                <div class="exp-meta">
+                  <span class="exp-time">Jan. 2024 – Aug. 2024</span>
+                  <span class="exp-location">Cambridge & Woodstock, ON</span>
+                </div>
+                <ul>
+                  <li>Implemented a laser locating system for the hub nut tightener that reduces the total line downtime by 7%</li>
+                  <li>Designed and fabricated 8 jigs and fixtures for pre-launch vehicle assembly, which allowed a smooth transition for updated vehicle model</li>
+                  <li>Managed large pull ahead projects such as AGV cage demolition and assembly line extension</li>
+                </ul>
+              </article>
+
+              <article class="exp-item">
+                <div class="company-logo-inline swap-logo-inline">
+                  <img src="swap-robotics.png" alt="Swap Robotics logo">
+                </div>
+                <h3>Operation Technician — Swap Robotics</h3>
+                <div class="exp-meta">
+                  <span class="exp-time">Sep. 2022 – Dec. 2022</span>
+                  <span class="exp-location">Kitchener, ON</span>
+                </div>
+                <ul>
+                  <li>Led robot assembly team, oversaw tasks such as PCB programming, soldering, and overall robot assembly</li>
+                  <li>Designed and 3D Printed a custom charger solution capable of charging 12 body cameras simultaneously while indicating charge progress</li>
+                  <li>Developed a protocol to test all robots functionalities, which sped up testing time by up to 50%</li>
+                </ul>
+              </article>
+
+              <article class="exp-item">
+                <div class="company-logo-inline multimatic-logo-inline">
+                  <img src="multimatic-logo.png" alt="Multimatic logo">
+                </div>
+                <h3>Laboratory Technician — Multimatic Inc.</h3>
+                <div class="exp-meta">
+                  <span class="exp-time">Jan. 2022 – Apr. 2022</span>
+                  <span class="exp-location">East Gwillimbury, ON</span>
+                </div>
+                <ul>
+                  <li>Tested reliability of prelaunch and in-production parts for Fords, General Motors, and Chrysler 
+                      by running tests such as ball joint/ bushing push outs, UTS tests, ball joint function fatigue tests,
+                      and torque measurements</li>
+                  <li>Led constructions of actuator setups to test reliability for control arms; conducted analysis using SOLIDWORKS to meet measurement requirements</li>
+                  <li>Analyzed and graphed numerical data from torque measuring software to ensure production criteria aremet</li>
+                </ul>
+              </article>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS (index) ============ -->
+    <section id="page-projects" class="page">
+      <div class="section-title"><h2>Projects</h2></div>
+      <div class="project-grid">
+
+        <div class="card">
+          <div class="card-photo">
+            <img src="precision-thermal.png" alt="Precision Thermal Monitoring System">
+          </div>
+          <h3>Precision Thermal Monitoring System</h3>
+          <a class="card-link" href="#" onclick="showPage('project-precision-thermal'); return false;">Learn More →</a>
+        </div>
+
+        <div class="card">
+          <div class="card-photo">
+            <img src="robot.jpg" alt="Remote Control Load-Carrying Robot" class="zoom-fit">
+          </div>
+          <h3>Remote Control Load-Carrying Robot</h3>
+          <a class="card-link" href="#" onclick="showPage('project-rc-robot'); return false;">Learn More →</a>
+        </div>
+
+      </div>
+
+      <div class="project-grid">
+        <div class="card placeholder-card">
+          <div class="card-photo ph" aria-hidden="true">
+            <div class="ph-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+              <span>Coming Soon</span>
+            </div>
+          </div>
+          <h3>More Project Write-Ups</h3>
+          <p class="card-desc">More project write ups coming...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECT: Precision Thermal Monitoring System ============ -->
+    <section id="page-project-precision-thermal" class="page">
+      <div class="back-link"><a href="#" onclick="showPage('projects'); return false;">← Back to Projects</a></div>
+      <div class="project-single">
+        <div class="project-full-item">
+          <div class="card-photo-lg">
+            <img src="leaves.png" alt="Precision Thermal Monitoring System">
+          </div>
+          <div>
+            <h2>Precision Thermal Monitoring System</h2>
+            <span class="dates">Sep 2025 – Apr 2026</span>
+            <h3>Project Background</h3>
+            <ul>
+              <li>Based on the Exergy Destruction Principle developed by the late James Kay, the health and development of an ecosysm can be assessed through thermal monitoring</li>
+              <li>Developed a low cost solution for thermal data collection and analysis capable of multi-days functionality without human intervention</li>
+              <li>Currently in use by Professor Roydon Fraser for graduate research at the University of Waterloo Environmental Reserve</li>
+            </ul>
+          </div>
+        </div>
+        <div class="iteration-section">
+          <h2>Mounting Design Iterations</h2>
+          <div class="iteration-gallery" aria-label="Mounting design iterations">
+            <figure class="iteration-item">
+              <img src="mount-iter1.png" alt="Mounting iteration 1">
+              <figcaption>
+                <h3>Iteration 1 (Brainstorming)</h3>
+                <ul>
+                  <li>Pros: Simple assembly, stable base.</li>
+                  <li>Cons: Bulky profile that vibrates; mount only fits one dimension</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="mount-iter2.png" alt="Mounting iteration 2">
+              <figcaption>
+                <h3>Iteration 2</h3>
+                <ul>
+                  <li>Pros: Adjustable mount dimension, reduced vibration & profile size</li>
+                  <li>Cons: Poor structural integrity leads to buckling</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="mount-iter3.png" alt="Mounting iteration 3">
+              <figcaption>
+                <h3>Iteration 3</h3>
+                <ul>
+                  <li>Pros: Improved structural integrity and load-bearing capacity</li>
+                  <li>Cons: No height adjustability</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="mount-iter4.png" alt="Mounting iteration 4">
+              <figcaption>
+                <h3>Iteration 4</h3>
+                <ul>
+                  <li>Pros: Balance of strength and adjustability.</li>
+                  <li>Cons: Slightly higher manufacturing effort.</li>
+                </ul>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="iteration-section">
+          <h2>Housing Design Iterations</h2>
+          <div class="iteration-gallery" aria-label="Housing design iterations">
+            <figure class="iteration-item">
+              <img src="housing-iter1.png" alt="Housing iteration 1">
+              <figcaption>
+                <h3>Iteration 1</h3>
+                <ul>
+                  <li>Pros: Simple and rigid design</li>
+                  <li>Cons: No weather protection</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="housing-iter2.png" alt="Housing iteration 2">
+              <figcaption>
+                <h3>Iteration 2</h3>
+                <ul>
+                  <li>Pros: Protected against environmental factors</li>
+                  <li>Cons: Limited adjustability</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="housing-iter3.png" alt="Housing iteration 3">
+              <figcaption>
+                <h3>Iteration 3</h3>
+                <ul>
+                  <li>Pros: Improved adjustability and added silica gel beads to remove moisture</li>
+                  <li>Cons: High weight and large profile</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="housing-iter4.png" alt="Housing iteration 4">
+              <figcaption>
+                <h3>Iteration 4</h3>
+                <ul>
+                  <li>Pros: Reduced weight and profile size</li>
+                  <li>Cons: Difficult to install and uninstall from mount</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="housing-iter5.png" alt="Housing iteration 5">
+              <figcaption>
+                <h3>Iteration 5</h3>
+                <ul>
+                  <li>Pros: Enhanced usability and added height adjustment functionality</li>
+                  <li>Cons: Not user friendly and poor structural integrity</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="housing-iter6.png" alt="Housing iteration 6">
+              <figcaption>
+                <h3>Iteration 6</h3>
+                <ul>
+                  <li>Pros: Enhanced height adjustment capability, improved rigidity</li>
+                  <li>Cons: Slightly higher manufacturing cost and more complex installation</li>
+                </ul>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="iteration-section final-deployment-section">
+          <h2>Final Deployment</h2>
+          <div class="iteration-gallery final-deployment" aria-label="Final deployment">
+            <figure class="iteration-item">
+              <img src="system-deployment.jpg" alt="System deployment">
+            </figure>
+            <figure class="iteration-item">
+              <img src="vl-IR-image.png" alt="VL-IR image">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECT: Remote Control Load-Carrying Robot ============ -->
+    <section id="page-project-rc-robot" class="page">
+      <div class="back-link"><a href="#" onclick="showPage('projects'); return false;">← Back to Projects</a></div>
+      <div class="project-single">
+        <div class="project-full-item">
+          <div class="card-photo-lg">
+            <img src="robot.jpg" alt="Remote Control Load-Carrying Robot" class="zoom-fit">
+          </div>
+          <div>
+            <h2>Remote Control Load-Carrying Robot</h2>
+            <span class="dates">Jan 2025 – Apr 2025</span>
+            <h3>Project Background</h3>
+            <ul>
+              <li>Designed and built a remote-control robot capable of carrying over five times its own weight.</li>
+              <li>Focused on a lightweight chassis and powertrain layout that maximized load capacity without sacrificing maneuverability.</li>
+              <li>Used a combined hardware and firmware approach to support reliable remote control operation and stable drivability.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="iteration-section">
+          <h2>Ideation</h2>
+          <div class="iteration-gallery" aria-label="Robot ideation iterations">
+            <figure class="iteration-item">
+              <img src="robot-iter1.jpg" alt="Robot iteration 1">
+              <figcaption>
+                <h3>Iteration 1 (Brainstorming)</h3>
+                <ul>
+                  <li>Electromagnet and a motor on top used for lifting</li>
+                  <li>Motors on back wheels used for steering</li>
+                  <li>Reinforcement on the frame to improve structural integrity</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="robot-iter2.png" alt="Robot iteration 2">
+              <figcaption>
+                <h3>Iteration 2 (Refinement)</h3>
+                <ul>
+                  <li>Removed frame for weight reduction and lower center of gravity; 
+                    added a reinforcement extrusion at the center </li>
+                  <li>BLDC motors on each rear wheel for improved performance</li>
+                  <li>Omni-directional wheels for enhanced maneuverability</li>
+                  <li>Replaced motor with lead screws for precise and stable lifting</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="robot-iter3.jpg" alt="Robot iteration 3">
+              <figcaption>
+                <h3>Iteration 3 (Finalization)</h3>
+                <ul>
+                  <li>Used motor instead of lead screw for higher load capacity (precision and stability of lifting is not prioritized)</li>
+                  <li>More rigid wheel support to ensure stability during operation</li>
+                  <li>Plexiglass used on the body to place cables and batteries</li>
+                </ul>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+          <div class="iteration-section">
+            <h2>Overview</h2>
+            <div class="overview-layout" aria-label="Robot circuitry overview">
+              <div class="overview-image-frame" style="grid-column:1 / -1;">
+                <img src="robot-assembled.jpeg" alt="Robot assembled overview" style="width:min(72%, 720px);">
+              </div>
+            </div>
+          </div>
+          <div class="iteration-gallery" aria-label="Robot circuitry iterations">
+            <figure class="iteration-item">
+              <img src="robot-battery.jpeg" alt="Robot battery">
+              <figcaption>
+                <h3>Battery</h3>
+                <ul>
+                  <li>A 36V battery pack was sourced from dissecting a hoverboard bought on Facebook Marketplace for $20</li>
+                  <li>The voltage will be stepped down using buck converters to different components</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="robot-motor-controller.png" alt="Robot motor controller">
+              <figcaption>
+                <h3>Motor Controller</h3>
+                <ul>
+                  <li>A 3-Phase PWM DC brushless motor speed controller was used to regulate the speed and direction of the brushless motors for the wheels</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="robot-motor.png" alt="Robot motor">
+              <figcaption>
+                <h3>Motor (Wheels)</h3>
+                <ul>
+                  <li>The motors for the wheels were also sourced from the same hoverboard bought on Facebook Marketplace</li>
+                  <li>The hoverboardmotors provide the necessary torque and speed for the required robot's mobility</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="robot-magnet%20motor.jpg" alt="Robot magnet motor">
+              <figcaption>
+                <h3>Motor (Magnet)</h3>
+                <ul>
+                  <li>The motor for the magnet was designed to generate a strong force to carry the appropriate load</li>
+                  <li>The mount was designed to secure the motor to the frame while the magnet is in use</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="robot-magnet.jpg" alt="Robot magnet">
+              <figcaption>
+                <h3>Magnet</h3>
+                <ul>
+                  <li>The magnetic assembly was selected to provide a strong lifting force for the load-carrying mechanism.</li>
+                  <li>It was mounted in a way that kept the lifting operation stable and aligned with the robot frame.</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="robot-esp32.jpg" alt="Robot ESP32">
+              <figcaption>
+                <h3>ESP32</h3>
+                <ul>
+                  <li>ESP32 microcontroller used to coordinate remote-control communication with the robot</li>
+                </ul>
+              </figcaption>
+            </figure>
+            <figure class="iteration-item">
+              <img src="robot-buck-converter.jpg" alt="Robot buck converter">
+              <figcaption>
+                <h3>Buck Converter</h3>
+                <ul>
+                  <li>Buck converters were used to step down the battery voltage to the required levels for each component</li>
+                </ul>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="iteration-section">
+            <h2>End Product</h2>
+            <video controls preload="metadata" playsinline style="display:block; width:min(92%, 1100px); margin:0 auto; border-radius:12px; background:#000;">
+              <source src="robot-end-product.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© Ryan Zheng</p>
+      <div class="footer-social">
+        <a href="mailto:ryantyzheng@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/ryanzhen03" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="image-modal" id="imageModal" role="dialog" aria-modal="true" aria-label="Image preview">
+    <div class="image-modal__content">
+      <button class="image-modal__close" id="imageModalClose" aria-label="Close image preview">×</button>
+      <img src="" alt="Expanded image" id="imageModalImg">
+    </div>
+  </div>
+
+<script>
+  function showPage(name){
+    document.querySelectorAll('.page').forEach(function(el){ el.classList.remove('active'); });
+    document.querySelectorAll('.nav-link').forEach(function(el){ el.classList.remove('active'); });
+    document.getElementById('page-' + name).classList.add('active');
+
+    // individual project pages don't have their own nav button —
+    // keep "Projects" highlighted in the nav for those
+    var navName = name.indexOf('project-') === 0 ? 'projects' : name;
+    var navBtn = document.getElementById('nav-' + navName);
+    if(navBtn) navBtn.classList.add('active');
+
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var modal = document.getElementById('imageModal');
+    var modalImg = document.getElementById('imageModalImg');
+    var modalClose = document.getElementById('imageModalClose');
+
+    function openImageModal(src, alt){
+      modalImg.src = src;
+      modalImg.alt = alt || 'Expanded image';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal(){
+      modal.classList.remove('active');
+      modalImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.iteration-item img').forEach(function(img){
+      img.addEventListener('click', function(){
+        openImageModal(img.src, img.alt);
+      });
+    });
+
+    modalClose.addEventListener('click', closeImageModal);
+    modal.addEventListener('click', function(event){
+      if(event.target === modal){
+        closeImageModal();
+      }
+    });
+
+    document.addEventListener('keydown', function(event){
+      if(event.key === 'Escape' && modal.classList.contains('active')){
+        closeImageModal();
+      }
+    });
+  });
+</script>
+</body>
+</html>
